@@ -12,7 +12,7 @@ Features
 - Speed slider controls animation delay.
 
 How to use
-1. Open `index.html` in your browser.
+1. Open `https://hair2143.github.io/Dijkstra_Algorithm/` in your browser.
 2. Add nodes by clicking. Click "Add Edge", click two nodes and enter a weight.
 3. Use "Pick Start" and "Pick End" to choose endpoints.
 4. Click Run to see the algorithm animate. Final shortest path will be highlighted in green.
