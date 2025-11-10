@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Dijkstra’s Algorithm Visualizer</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1>Dijkstra’s Algorithm Visualizer</h1>
+  </header>
+
+  <main class="layout">
+    <section class="canvas-area">
+      <div class="controls">
+        <div class="left-controls">
+          <button id="mode-add-node" class="active">Add Node</button>
+          <button id="mode-add-edge">Add Edge</button>
+          <button id="mode-pick-start">Pick Start</button>
+          <button id="mode-pick-end">Pick End</button>
+          <button id="random-graph">Random Graph</button>
+          <label class="speed">Delay (ms): <input id="speed" type="range" min="10" max="2000" value="300"> <span id="speed-value">300</span></label>
+        </div>
+        <div class="right-controls">
+          <button id="run">Run</button>
+          <button id="reset">Reset</button>
+          <button id="clear">Clear</button>
+        </div>
+      </div>
+
+      <div class="canvas-wrapper">
+        <canvas id="graph-canvas"></canvas>
+      </div>
+    </section>
+
+    <aside class="sidebar">
+      <div class="panel">
+        <h2>Algorithm Status</h2>
+        <p>Current node: <span id="current-node">—</span></p>
+        <p>Start: <span id="start-node">—</span> | End: <span id="end-node">—</span></p>
+        <h3>Distances</h3>
+        <div class="table-wrap">
+          <table id="dist-table">
+            <thead><tr><th>Node</th><th>Distance</th><th>Visited</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h2>How it works</h2>
+        <p>Dijkstra’s algorithm finds the shortest path from a start node to all other nodes in a weighted graph with non-negative weights. We use a priority queue (min-heap) to always explore the closest unvisited node next. The visualizer animates visiting nodes, updating tentative distances, and finally highlights the shortest path from start to end.</p>
+        <ol>
+          <li>Add nodes by clicking the canvas.</li>
+          <li>Click "Add Edge", click two nodes and enter a weight.</li>
+          <li>Select start and end nodes, then click Run.</li>
+        </ol>
+      </div>
+    </aside>
+  </main>
+
+  <footer>
+    <small>Interactive visualizer — client-side only. Ready for GitHub Pages (index.html at root).</small>
+  </footer>
+
+  <script src="graph.js"></script>
+  <script src="dijkstra.js"></script>
+  <script src="ui.js"></script>
+</body>
+</html>
