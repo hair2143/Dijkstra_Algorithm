@@ -9,7 +9,9 @@ const Graph = {
   currentNode: null,
   showEdgeWeights: true,
   showNodeLabels: true,
-  showNodeDegrees: true,
+  // Toggle whether to draw per-node degree labels on the canvas.
+  // Set to false to hide the small numbers under nodes while keeping degree data and table updates intact.
+  showNodeDegrees: false,
   canvas: null,
   ctx: null,
   dpr: window.devicePixelRatio || 1,

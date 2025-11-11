@@ -108,7 +108,7 @@ function highlightTemp(node){ draw(); ctx.beginPath(); ctx.arc(node.x,node.y,24,
 function clearAll(){ nodes=[]; edges=[]; nextId=0; startNode=null; endNode=null; resetRun(); draw(); updateUI(); }
 function resetRun(){ if(animTimer) { clearTimeout(animTimer); animTimer=null; } updateUI(); draw(); }
 
-// Drawing
+
 function draw(){
   ctx.clearRect(0,0,canvas.width/dpr,canvas.height/dpr);
   // edges
@@ -118,7 +118,7 @@ function draw(){
     if(!a||!b) return;
     ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y);
     ctx.strokeStyle = '#2a3640'; ctx.lineWidth=3; ctx.stroke();
-    // weight label
+
     const mx = (a.x+b.x)/2, my=(a.y+b.y)/2;
     ctx.fillStyle = '#c7f2ff'; ctx.font='12px sans-serif'; ctx.fillText(e.weight, mx+6, my-6);
   });
@@ -147,7 +147,7 @@ function updateUI(dist=null, visited=null, current=null){
   });
 }
 
-// MinHeap for Dijkstra
+
 class MinHeap {
   constructor(){ this.data = []; }
   push(item,priority){ this.data.push({item,priority}); this._siftUp(this.data.length-1); }
@@ -195,13 +195,13 @@ function runDijkstra(){
   let i=0;
   function step(){
     if(i>=steps.length){
-      // show final distances and highlight path
+ 
       updateUI(dist, visited, null); draw(); if(path.length>0) drawPath(path);
       return;
     }
     const s = steps[i++];
     updateUI(s.dist, s.visited, s.type==='visit'? s.node : null);
-    // visual cue: color current node and any edge updated
+  
     draw();
     if(s.type==='visit'){
       const nobj = nodes.find(n=>n.id===s.node);
@@ -211,7 +211,7 @@ function runDijkstra(){
       const a = nodes.find(n=>n.id===s.from); const b = nodes.find(n=>n.id===s.to);
       if(a&&b){ ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y); ctx.strokeStyle='rgba(16,185,129,0.9)'; ctx.lineWidth=4; ctx.stroke(); }
     }
-    // schedule next
+
     animTimer = setTimeout(step, parseInt(speedInput.value));
   }
   step();
@@ -247,5 +247,5 @@ function generateRandomGraph(){
   startNode = 0; endNode = r-1; updateUI(); draw();
 }
 
-// initial draw
+
 updateUI(); draw();
