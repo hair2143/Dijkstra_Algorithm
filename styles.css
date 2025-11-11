@@ -11,19 +11,19 @@
 html,body{height:100%;margin:0;font-family:Inter,Segoe UI,Roboto,Arial,sans-serif;background:linear-gradient(180deg,#071024,var(--bg));color:#e6eef8}
 header{padding:12px 20px;border-bottom:1px solid rgba(255,255,255,0.03)}
 header h1{margin:0;font-size:20px}
-.layout{display:grid;grid-template-columns:1fr 340px;gap:16px;padding:16px}
+.layout{display:grid;grid-template-columns:2fr 1fr;gap:16px;padding:16px;height:auto;align-items:start}
 .canvas-area{display:flex;flex-direction:column;gap:12px}
 .controls{display:flex;justify-content:space-between;align-items:center}
 .controls .left-controls, .controls .right-controls{display:flex;gap:8px;flex-wrap:wrap}
 button{background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.04);color:var(--accent);padding:8px 10px;border-radius:6px;cursor:pointer}
 button.active{background:var(--accent);color:#042027}
 label.speed{display:flex;align-items:center;gap:8px;color:var(--muted)}
-.canvas-wrapper{flex:1;background:linear-gradient(180deg,#071428,#02111a);border-radius:10px;padding:12px;display:flex}
-canvas#graph-canvas{width:100%;height:600px;border-radius:8px;background:transparent}
+.canvas-wrapper{background:linear-gradient(180deg,#071428,#02111a);border-radius:10px;padding:12px;display:block;min-height:500px;overflow:hidden}
+canvas#graph-canvas{width:100%;height:600px;border-radius:8px;background:transparent;display:block}
 .sidebar{display:flex;flex-direction:column;gap:12px}
 .panel{background:var(--card);padding:12px;border-radius:8px;border:1px solid rgba(255,255,255,0.03)}
 .panel h2{margin:0 0 8px 0}
-.table-wrap{max-height:300px;overflow:auto}
+.table-wrap{max-height:none;overflow:visible}
 table{width:100%;border-collapse:collapse;color:#dbeafe}
 th,td{padding:6px 8px;text-align:left;border-bottom:1px solid rgba(255,255,255,0.03);font-size:14px}
 td .dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:8px}
@@ -36,6 +36,51 @@ footer{padding:10px 16px;text-align:center;color:var(--muted);font-size:13px}
   canvas#graph-canvas{height:420px}
 }
 
+/* MST panel styling (dark theme consistent with site) */
+.mst-panel{background:var(--card);padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.03);color:#dbeafe;margin-top:8px}
+.mst-panel h3{margin:0 0 8px 0;font-size:15px}
+.mst-panel table{width:100%;border-collapse:collapse}
+.mst-panel th, .mst-panel td{padding:6px 8px;border-bottom:1px solid rgba(255,255,255,0.03);font-size:13px}
+.mst-panel tbody{max-height:none;overflow:visible}
+
+/* Node Degrees panel styling */
+.degree-panel{background:#0d1a2b;border-radius:8px;margin-top:10px;padding:10px;color:#fff;font-size:14px}
+.degree-panel table{width:100%;border-collapse:collapse}
+.degree-panel th, .degree-panel td{border-bottom:1px solid #223;text-align:center;padding:4px 8px}
+
 /* Canvas visuals are painted by JS; add utility styles for legends */
 .legend{display:flex;gap:10px;align-items:center}
 .legend .item{display:flex;gap:6px;align-items:center}
+
+/* Code execution panel styles - right sidebar layout */
+.canvas-area{gap:16px}
+.code-panel .code-block{background:linear-gradient(180deg,#071428,#02111a);padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);color:#e6eef8;max-height:none;overflow:visible}
+.code-panel h2{margin:0 0 8px 0;font-size:16px}
+.code-line{display:block;padding:6px 8px;border-radius:4px;white-space:pre}
+.code-line.active{background:linear-gradient(90deg,#fef3c7,#fde68a);color:#042027;font-weight:700}
+.code-explain{margin-top:8px;padding:8px;background:rgba(255,255,255,0.02);border-radius:6px;color:var(--muted);font-size:14px}
+
+/* Explanation box for beginners: light blue and auto-scroll behavior */
+#explanationBox.explanation{margin-top:8px;padding:10px;background:linear-gradient(180deg,#e6f7ff,#dbeffd);border-radius:6px;color:#042027;font-size:14px;max-height:none;overflow:visible;border:1px solid rgba(3,105,161,0.08)}
+
+/* Sidebar panels sizing: code on top, status below */
+.sidebar{display:flex;flex-direction:column;gap:12px;height:auto}
+.sidebar .code-panel{flex:none;min-height:0;overflow:visible}
+.sidebar .status-panel{flex:none;min-height:0;overflow:visible}
+
+@media (min-width:981px){
+  .canvas-wrapper{flex:1}
+  .canvas-area{display:block}
+}
+
+/* Make pre/code wrap so long lines don't force horizontal scroll */
+.code-panel pre{white-space:pre-wrap;word-break:break-word}
+
+/* Optional highlight when MST is populated */
+.mst-panel.highlight{box-shadow:0 0 18px rgba(245,158,11,0.18);border-color:rgba(245,158,11,0.22)}
+
+@media (max-width:980px){
+  .layout{grid-template-columns:1fr}
+  .sidebar{order:2}
+  canvas#graph-canvas{height:420px}
+}

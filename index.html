@@ -20,10 +20,15 @@
           <button id="mode-pick-start">Pick Start</button>
           <button id="mode-pick-end">Pick End</button>
           <button id="random-graph">Random Graph</button>
+          <!-- Large random graph controls -->
+          <input type="number" id="nodeCount" placeholder="Nodes (e.g., 100)" min="2" max="1000" style="width:100px">
+          <input type="number" id="avgWeight" placeholder="Avg Weight (e.g., 2.5)" step="0.1" min="0.1" style="width:110px">
+          <button id="randomGraphBtn">Generate Random Graph</button>
           <label class="speed">Delay (ms): <input id="speed" type="range" min="10" max="2000" value="300"> <span id="speed-value">300</span></label>
         </div>
         <div class="right-controls">
           <button id="run">Run</button>
+          <button id="stepBtn">Step</button>
           <button id="reset">Reset</button>
           <button id="clear">Clear</button>
         </div>
@@ -32,10 +37,49 @@
       <div class="canvas-wrapper">
         <canvas id="graph-canvas"></canvas>
       </div>
+      <!-- Shortest Path Tree (MST from Dijkstra) panel -->
+      <div id="mstPanel" class="mst-panel">
+        <h3>Shortest Path Tree (MST from Dijkstra)</h3>
+        <table id="mstTable">
+          <thead><tr><th>Node</th><th>Parent</th><th>Edge Weight</th><th>Path Cost</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      
+      <!-- Node Degrees panel -->
+      <div id="degreePanel" class="degree-panel">
+        <h3>Node Degrees</h3>
+        <table id="degreeTable">
+          <thead><tr><th>Node</th><th>Degree</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      
     </section>
 
     <aside class="sidebar">
-      <div class="panel">
+      <!-- Code execution panel moved to the top of the right sidebar -->
+      <div class="panel code-panel" id="codePanelWrap">
+        <h2>Code Execution</h2>
+        <div id="codePanel" class="code-block">
+          <pre>
+<span class="code-line" id="line1">1  initialize all distances to ∞</span>
+<span class="code-line" id="line2">2  set dist[start] = 0</span>
+<span class="code-line" id="line3">3  while priorityQueue not empty:</span>
+<span class="code-line" id="line4">4      u = node with smallest dist</span>
+<span class="code-line" id="line5">5      mark u as visited</span>
+<span class="code-line" id="line6">6      for each neighbor v of u:</span>
+<span class="code-line" id="line7">7          if dist[u] + weight(u,v) &lt; dist[v]:</span>
+<span class="code-line" id="line8">8              dist[v] = dist[u] + weight(u,v)</span>
+<span class="code-line" id="line9">9              enqueue v</span>
+          </pre>
+        </div>
+        <div id="code-explain" class="code-explain">Ready</div>
+        <!-- Beginner-friendly explanation box (auto-scrolls) -->
+        <div id="explanationBox" class="explanation">Explanation: Waiting for algorithm to start...</div>
+      </div>
+
+      <div class="panel status-panel">
         <h2>Algorithm Status</h2>
         <p>Current node: <span id="current-node">—</span></p>
         <p>Start: <span id="start-node">—</span> | End: <span id="end-node">—</span></p>
