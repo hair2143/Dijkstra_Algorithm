@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Real-World Map Mode — Dijkstra Visualizer</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="map.css">
+</head>
+<body>
+  <header class="map-header">
+    <h1>Real-World Map Mode</h1>
+    <p class="subtitle">Approximate Chennai routing demo using Dijkstra + Leaflet (OpenStreetMap tiles, no API keys)</p>
+  </header>
+
+  <main class="map-layout">
+    <aside class="map-controls">
+      <div class="field">
+        <label for="sourceInput">Source</label>
+        <input id="sourceInput" placeholder="e.g. Chennai Central or choose preset"/>
+      </div>
+
+      <div class="field">
+        <label for="destInput">Destination</label>
+        <input id="destInput" placeholder="e.g. VIT Chennai or choose preset"/>
+      </div>
+
+      <div class="field">
+        <label for="presetSelect">Presets</label>
+        <select id="presetSelect">
+          <option value="">-- choose preset --</option>
+          <option value="Chennai Central|VIT Chennai">Chennai Central → VIT Chennai</option>
+          <option value="Chennai Airport|Guindy">Airport → Guindy</option>
+          <option value="Anna Nagar|Adyar">Anna Nagar → Adyar</option>
+        </select>
+      </div>
+
+      <div class="buttons">
+        <button id="findBtn">Find Shortest Route</button>
+        <button id="reverseBtn">Reverse</button>
+        <button id="clearBtn">Clear</button>
+      </div>
+
+      <div id="routeInfo" class="route-info">No route selected</div>
+
+      <div class="notes">No API keys required. Map tiles come from OpenStreetMap. Works offline only if you host tiles locally.</div>
+    </aside>
+
+    <section class="map-container">
+      <div id="map" class="leaflet-map"></div>
+    </section>
+  </main>
+
+  <footer class="map-footer">Return to <a href="index.html">Visualizer</a></footer>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="map.js"></script>
+</body>
+</html>
